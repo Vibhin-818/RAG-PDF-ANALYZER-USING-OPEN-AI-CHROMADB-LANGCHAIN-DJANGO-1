@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask a Question</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url("https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg?w=1800&t=st=1728188629~exp=1728189229~hmac=2d2f6624ce4c32af2ca83572ef3525360d8d16b50b211e08aa7a1b4b09d394e1") no-repeat center center fixed; /* Add background image */
+            background-size: cover; /* Ensure the background covers the entire screen */
+            padding: 20px;
+            color: #fff; /* Make text white for better contrast on dark backgrounds */
+        }
+
+        h2 {
+            color: #fff; /* Change header color to white */
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Add shadow for better readability */
+        }
+
+        form {
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for form */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 10px;
+            border-radius: 4px; /* Rounded corners for input */
+            border: 1px solid #ddd; /* Add a light border */
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        audio {
+            display: block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Ask a Question about "{{ pdf.title }}"</h2>
+
+<form method="POST" action="{% url 'ask_question' pdf.id %}">
+    {% csrf_token %}
+    <input type="text" name="query" placeholder="Type your question here..." value="{{ query }}">
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Add PDF-to-Speech button as a separate form pointing to the speech conversion view -->
+<form method="POST" action="{% url 'convert_pdf_to_speech' pdf.id %}">
+    {% csrf_token %}
+    <button type="submit">Convert PDF to Speech</button>
+</form>
+
+{% if result %}
+    <h3>Answer:</h3>
+    <p>{{ result }}</p>
+{% endif %}
+
+<!-- Audio Player Section -->
+{% if audio_file %}
+    <h3>Listen to PDF Content:</h3>
+    <audio controls>
+        <source src="{{ MEDIA_URL }}{{ audio_file }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <h4>Download Audio:</h4>
+    <a href="{{ MEDIA_URL }}{{ audio_file }}" download>Download Audio File</a>
+{% else %}
+    <h3>No audio available.</h3>
+{% endif %}
+
+</body>
+</html>

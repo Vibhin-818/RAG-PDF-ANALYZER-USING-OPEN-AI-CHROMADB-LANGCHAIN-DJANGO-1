@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded PDFs</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: url("https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg?w=1800&t=st=1728188629~exp=1728189229~hmac=2d2f6624ce4c32af2ca83572ef3525360d8d16b50b211e08aa7a1b4b09d394e1") no-repeat center center fixed;
+            background-size: cover; /* Ensures the background covers the entire screen */
+            color: #fff; /* Makes text readable on the background */
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adds a shadow to make text stand out */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        li {
+            background-color: rgba(255, 255, 255, 0.8); /* Makes the background slightly transparent */
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+            font-weight: bold;
+            flex-grow: 1; /* Allows the link to take remaining space */
+            margin-right: 10px; /* Spacing between link and button */
+            transition: color 0.3s ease;
+        }
+
+        li a:hover {
+            color: #0056b3;
+        }
+
+        .download-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Adds a shadow to make text stand out */
+        }
+    </style>
+</head>
+<body>
+    {% load static %} <!-- This line is necessary to use the static tag -->
+    <h2>Uploaded PDFs</h2>
+    <ul id="pdf-list">
+        {% for pdf in pdfs %}
+            <li>
+                <a href="{% url 'ask_question' pdf.id %}">{{ pdf.title }}</a>
+                <a href="{{ pdf.file.url }}" class="download-button" download="{{ pdf.title }}">Download</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h3>Listen to  Audios:</h3>
+    <h1>History Audio</h1> <audio controls>
+       <source src="{% static 'history.mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <br>
+    <h1>Hitlerbiography  Audio</h1>
+    <audio controls>
+        <source src="{% static 'two.mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <br>
+    <h1>WHO</h1>
+    <audio controls>
+        <source src="{% static 'who.mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function readPDFTitles() {
+            const pdfList = document.getElementById('pdf-list');
+            const pdfItems = pdfList.getElementsByTagName('li');
+            let titles = 'Welcome to the Uploaded PDFs page. Here are your documents: ';
+
+            for (let item of pdfItems) {
+                titles += item.innerText + '. '; // Concatenate all titles
+            }
+
+            const speech = new SpeechSynthesisUtterance(titles);
+            speech.lang = 'en-US'; // Set the language
+            window.speechSynthesis.speak(speech);
+        }
+
+        // Invoke the function to read the titles when the page loads
+        window.onload = function() {
+            readPDFTitles();
+        };
+    </script>
+</body>
+</html>

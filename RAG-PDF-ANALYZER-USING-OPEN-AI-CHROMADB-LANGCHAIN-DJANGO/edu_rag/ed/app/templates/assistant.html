@@ -1,0 +1,58 @@
+<!-- templates/voice_assistant/assistant.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voice Assistant</h1>
+    <button id="start-button">Start Assistant</button>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('start-button').addEventListener('click', function() {
+            document.getElementById('output').innerHTML = "Assistant is starting...";
+            fetch('/assistant/start_voice_assistant/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',  // Include CSRF token
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerHTML = data.response;
+            })
+            .catch(error => {
+                document.getElementById('output').innerHTML = "Error starting the assistant.";
+            });
+        });
+    </script>
+</body>
+</html>

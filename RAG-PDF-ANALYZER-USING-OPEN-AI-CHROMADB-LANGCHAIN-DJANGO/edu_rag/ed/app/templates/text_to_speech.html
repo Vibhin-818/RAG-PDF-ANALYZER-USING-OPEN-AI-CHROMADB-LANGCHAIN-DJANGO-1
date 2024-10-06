@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech for {{ pdf.title }}</title>
+    {% load static %}  <!-- Ensure you load the static tag here -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/ai-technology-microchip-background-vector-digital-transformation-concept_53876-117808.jpg?t=st=1728191175~exp=1728194775~hmac=2dad40f37b1508d893e6063d4e33e354ece095874680980924461e13e8a9b774&w=1800"); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: #bbc7ee;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-top: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Text to Speech Conversion for {{ pdf.title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Convert PDF to Speech</button>
+    </form>
+
+    {% if audio_file %}
+        <h2>Listen to the Audio:</h2>
+        <audio controls>
+            <source src="{{ pdf.audio_file.url }}" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    {% endif %}
+
+    <br>
+    <h2>Uploaded PDF Documents:</h2>
+    <ul>
+        {% for pdf in pdfs %}
+            <li>
+                {{ pdf.title }} - 
+                <a class="button" href="{% url 'text_to_speech' pdf.id %}">Convert to Speech</a>
+                <a class="button" href="{% url 'ask_question' pdf.id %}">Ask Questions</a>
+                {% if pdf.audio_file %}
+                    <audio controls>
+                        <source src="{{ pdf.audio_file.url }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <br>
+    <a class="button" href="{% url 'pdf_list' %}">Back to PDF List</a>
+</body>
+</html>

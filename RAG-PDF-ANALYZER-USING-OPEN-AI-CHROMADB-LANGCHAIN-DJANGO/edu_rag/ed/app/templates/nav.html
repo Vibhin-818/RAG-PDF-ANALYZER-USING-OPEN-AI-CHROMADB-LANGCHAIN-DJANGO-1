@@ -1,0 +1,68 @@
+<!-- navbar.html -->
+<nav class="navbar">
+    <ul class="navbar-list">
+        <li class="navbar-item">
+            <a href="{% url 'home' %}" class="navbar-link">Home</a>
+        </li>
+        <li class="navbar-item">
+            <a href="{% url 'upload_pdf' %}" class="navbar-link">Upload PDF</a>
+        </li>
+        <li class="navbar-item">
+            <a href="{% url 'pdf_list' %}" class="navbar-link">View PDFs and ChatBot</a>
+        </li>
+        
+        <li class="navbar-item">
+            <a href="{% url 'text_to_speech' pdf_id=1 %}" class="navbar-link">Text to Speech</a>
+        </li>
+        
+    </ul>
+</nav>
+
+<!-- Add this CSS to your stylesheet or within a <style> tag -->
+<style>
+    .navbar {
+        background-color: #007bff;
+        padding: 15px 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;  /* Make it responsive */
+    }
+
+    .navbar-item {
+        margin: 0 20px;
+    }
+
+    .navbar-link {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 600;  /* Bolder text */
+        transition: color 0.3s;
+        padding: 5px 10px; /* Padding for better click area */
+        border-radius: 4px; /* Slight rounding for buttons */
+    }
+
+    .navbar-link:hover {
+        background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+        color: #ffffff; /* Keep text color white on hover */
+    }
+
+    /* Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+        .navbar-list {
+            flex-direction: column;
+            align-items: center; /* Center items in column */
+        }
+
+        .navbar-item {
+            margin: 10px 0; /* Vertical spacing for items */
+        }
+    }
+</style>

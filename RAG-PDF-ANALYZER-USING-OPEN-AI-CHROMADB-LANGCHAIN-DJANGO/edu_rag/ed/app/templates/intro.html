@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to PDF Assistant</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/ai-technology-microchip-background-vector-digital-transformation-concept_53876-117808.jpg?t=st=1728191175~exp=1728194775~hmac=2dad40f37b1508d893e6063d4e33e354ece095874680980924461e13e8a9b774&w=1800"); /* Background image */
+            background-size: cover;
+            background-position: center;
+            color: #bbc7ee;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 100px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-top: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        p {
+            font-size: 18px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        .speech-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #28a745; /* Green color for speech button */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .speech-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <h1>Welcome to the PDF Assistant</h1>
+    <h2>Your One-Stop Solution for PDF Management!</h2>
+    <p id="intro-text">
+        This application allows you to upload PDF documents, ask questions about the content, and even convert text to speech. 
+        It simplifies the way you interact with your PDFs and makes information more accessible.
+    </p>
+    <p>
+        Start by uploading your first PDF document, or browse through your uploaded files!
+    </p>
+    <a class="button" href="{% url 'upload_pdf' %}">Upload PDF</a>
+    <a class="button" href="{% url 'pdf_list' %}">View Uploaded PDFs</a>
+    <a class="button" href="{% url 'text_to_speech' pdf_id=1 %}">Convert to Speech</a> <!-- Replace '1' with the appropriate PDF ID -->
+    <button class="speech-button" onclick="readAloud()">Read Aloud</button>
+
+    <script>
+        function readAloud() {
+            const text = document.getElementById('intro-text').innerText;
+            const speech = new SpeechSynthesisUtterance(text);
+            speech.lang = 'en-US'; // Set the language
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+</body>
+</html>

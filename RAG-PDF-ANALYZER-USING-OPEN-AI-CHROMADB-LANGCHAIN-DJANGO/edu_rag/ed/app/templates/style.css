@@ -1,0 +1,120 @@
+/* styles.css */
+
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url("https://img.freepik.com/free-vector/abstract-technology-betwork-wire-mesh-background_1017-17263.jpg?w=1800&t=st=1728188629~exp=1728189229~hmac=2d2f6624ce4c32af2ca83572ef3525360d8d16b50b211e08aa7a1b4b09d394e1") no-repeat center center fixed; /* Background image */
+    background-size: cover; /* Cover the entire viewport */
+    padding: 20px;
+    color: #fff; /* Text color */
+}
+
+/* Headings */
+h2 {
+    color: #fff; /* White text for headers */
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Shadow for readability */
+}
+
+/* Forms */
+form {
+    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background for form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+}
+
+/* Input fields */
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 10px;
+    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #ddd; /* Light border */
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Audio controls */
+audio {
+    display: block;
+    margin-top: 20px;
+}
+
+/* PDF List Page Styles */
+ul {
+    list-style: none;
+    padding: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+li {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li a {
+    text-decoration: none;
+    color: #007bff; /* Link color */
+    font-size: 18px;
+    font-weight: bold;
+    flex-grow: 1; /* Allows the link to take remaining space */
+    margin-right: 10px; /* Spacing between link and button */
+    transition: color 0.3s ease;
+}
+
+li a:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+/* Download button styles */
+.download-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    li {
+        flex-direction: column; /* Stack elements vertically on smaller screens */
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    li a {
+        margin-right: 0; /* Remove right margin for mobile */
+        margin-bottom: 10px; /* Add margin at the bottom */
+    }
+}

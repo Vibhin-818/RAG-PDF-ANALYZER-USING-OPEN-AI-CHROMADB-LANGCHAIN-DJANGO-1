@@ -1,0 +1,7 @@
+Django==4.2.3
+openai==0.27.0
+langchain==0.0.310
+chromadb==0.3.21
+pyttsx3==2.10
+speech_recognition==3.8.1
+selenium==4.17.0
